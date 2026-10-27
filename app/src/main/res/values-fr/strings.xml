@@ -1,0 +1,5 @@
+<resources>
+    <string name="shortcut_breathe">Respirer maintenant</string>
+    <string name="channel_session">Séance en cours</string>
+    <string name="channel_reminder">Rappel en douceur</string>
+</resources>

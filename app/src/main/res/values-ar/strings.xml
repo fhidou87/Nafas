@@ -1,0 +1,5 @@
+<resources>
+    <string name="shortcut_breathe">تنفّس الآن</string>
+    <string name="channel_session">جلسة جارية</string>
+    <string name="channel_reminder">تذكير لطيف</string>
+</resources>

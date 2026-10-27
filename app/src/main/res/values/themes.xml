@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.Nafas" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/nafas_bg</item>
+        <item name="android:colorPrimary">@color/nafas_accent</item>
+        <item name="android:colorAccent">@color/nafas_accent</item>
+        <item name="android:statusBarColor">@color/nafas_accent</item>
+        <item name="android:navigationBarColor">@color/nafas_bg</item>
+    </style>
+</resources>

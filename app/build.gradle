@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Signing comes from environment variables set by the GitHub workflow (from repository secrets).
+// Without them the release APK is signed with the build machine's debug key.
+def ksPath = System.getenv("KEYSTORE_PATH")
+def hasKeystore = ksPath != null && new File(ksPath).exists()
+
+android {
+    namespace 'com.nafas.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.nafas.app'
+        minSdk 24
+        targetSdk 34
+        versionCode((System.getenv("VERSION_CODE") ?: "1").toInteger())
+        versionName "1.0." + (System.getenv("VERSION_CODE") ?: "1")
+    }
+
+    signingConfigs {
+        release {
+            if (hasKeystore) {
+                storeFile file(ksPath)
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig hasKeystore ? signingConfigs.release : signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.11.0'
+}
